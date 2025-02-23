@@ -1,0 +1,185 @@
+/* Stili generali */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
+
+/* Barra di navigazione */
+nav {
+  background: #222;
+  padding: 10px;
+  text-align: center;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 18px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Contenitore principale */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Titoli delle sezioni */
+h2 {
+  color: #333;
+  text-align: center;
+}
+
+/* Form di inserimento */
+.order-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-form input,
+.order-form select,
+.order-form button {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.order-form input {
+  width: calc(33% - 10px);
+}
+
+.order-form select {
+  width: calc(33% - 10px);
+}
+
+.order-form button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.order-form button:hover {
+  background-color: #218838;
+}
+
+/* Sezione gestione ordini */
+.order-section {
+  margin-top: 20px;
+  padding: 15px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Filtri */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.filters input,
+.filters select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 180px;
+}
+
+/* Stile degli ordini */
+.order-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.order-card {
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  width: 280px;
+  text-align: left;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Icona del calendario per il campo data */
+input[type="date"] {
+  position: relative;
+  appearance: none; /* Nasconde l'icona predefinita */
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  padding-right: 35px; /* Spazio per l'icona */
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+
+  /* Aggiunge l'icona del calendario */
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDE0IDE0Ij48cGF0aCBmaWxsPSIjN0E3QTdBIiBkPSJNMiAxMHYxYTYuMDA2IDYuMDA2IDAgMCAwIDYgNiA2LjAwNiA2LjAwNiAwIDAgMCA2LTZWMTBIMnoiLz48cGF0aCBmaWxsPSIjN0E3QTdBIiBkPSJNNi4wMDIgMWEuOTk5Ljk5OSAwIDEgMCAwIDEuOTk5Yy0xLjA5NiAwLTIgLjkwNC0yIDJWNGgtMXYxMWgxMlY0aC0xdjEuOTk5YzAgMS4wOTYtLjkwNCAyLTIgMnoiLz48cGF0aCBmaWxsPSIjN0E3QTdBIiBkPSJNNCA4aDJ2Mkg0em0zIDBoMnYyaC0yek02IDEwaDJ2Mkg2eiIvPjwvc3ZnPg==');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+}
+
+/* Stile per gli stati con pallini colorati */
+.status-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.status-red {
+  background-color: red;
+}
+
+.status-yellow {
+  background-color: orange;
+}
+
+.status-green {
+  background-color: green;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .order-form input,
+  .order-form select {
+    width: 100%;
+  }
+
+  .filters input,
+  .filters select {
+    width: 100%;
+  }
+
+  .order-card {
+    width: 100%;
+  }
+}
