@@ -148,6 +148,8 @@ button:not(.close-btn) {
   border-radius: 5px;
 }
 
+
+/* Override per rimuovere l'icona del calendario nell'input date */
 .no-icon {
   background-image: none !important;
   max-width: 200px; /* Imposta qui la larghezza massima desiderata */
