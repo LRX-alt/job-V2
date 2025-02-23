@@ -33,6 +33,7 @@
             <p><strong>Cliente:</strong> {{ order.cliente }}</p>
             <p><strong>Materiale:</strong> {{ order.materiale }}</p>
             <p><strong>Lavorazione:</strong> {{ order.lavorazione }}</p>
+            <!-- Usa la funzione formattaData -->
             <p><strong>Data:</strong> {{ formattaData(order.data) }}</p>
             <p><strong>Job ID:</strong> {{ order.jobId }}</p>
 
@@ -67,43 +68,61 @@ export default {
     const filtroData = ref("");
     const filtroCliente = ref("");
     const filtroLavorazione = ref("");
+    const showModal = ref(false);
 
-    // Recupero ordini da Firestore
+    // Recupera ordini da Firestore
     onSnapshot(collection(db, "orders"), (snapshot) => {
       ordini.value = snapshot.docs
         .map((doc) => ({ id: doc.id, ...doc.data() }))
+        // Filtriamo per NON archiviati
         .filter((order) => !order.archiviato);
     });
 
-    // Filtrare gli ordini
+    // Computed per filtrare
     const ordiniFiltrati = computed(() => {
       return ordini.value.filter((order) => {
-        return (
-          (!filtroData.value || order.data === filtroData.value) &&
-          (!filtroCliente.value || order.cliente.toLowerCase().includes(filtroCliente.value.toLowerCase())) &&
-          (!filtroLavorazione.value || order.lavorazione === filtroLavorazione.value)
-        );
+        const matchData = !filtroData.value || order.data === filtroData.value;
+        const matchCliente = !filtroCliente.value || order.cliente?.toLowerCase().includes(filtroCliente.value.toLowerCase());
+        const matchLav = !filtroLavorazione.value || order.lavorazione === filtroLavorazione.value;
+
+        return matchData && matchCliente && matchLav;
       });
     });
 
-    // Funzione per aggiornare lo stato dell'ordine e archiviarlo se "Lavorato"
+    // Funzione per aggiornare lo stato dell'ordine
     const aggiornaOrdine = async (order) => {
       const ordineRef = doc(db, "orders", order.id);
       await updateDoc(ordineRef, { stato: order.stato });
 
+      // Se lo stato è Lavorato, archiviamo l'ordine
       if (order.stato === "Lavorato") {
         await updateDoc(ordineRef, { archiviato: true });
       }
     };
 
+    // Funzione per formattare la data
+    const formattaData = (dataStr) => {
+      if (!dataStr) return "";
+      const parti = dataStr.split("-");
+      return `${parti[2]}/${parti[1]}/${parti[0]}`;
+    };
+
+    // Quando un nuovo ordine viene aggiunto dal modale
+    const handleOrderAdded = () => {
+      showModal.value = false;
+    };
+
     return {
+      showModal,
       ordini,
       filtroData,
       filtroCliente,
       filtroLavorazione,
       ordiniFiltrati,
-      aggiornaOrdine
+      aggiornaOrdine,
+      formattaData,
+      handleOrderAdded,
     };
-  }
+  },
 };
 </script>
